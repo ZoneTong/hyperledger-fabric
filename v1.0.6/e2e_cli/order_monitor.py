@@ -68,7 +68,7 @@ def check_peers(ports, failedcnts, peers):
                 cmd='mv /bgi/blockchain_data/%s/logs/peer.log > /bgi/downpeerlog/%s_%s.log' % (peer,peer, time.strftime("%m%d_%H%M%S", time.localtime()))
                 print os.popen(cmd).readlines()
 
-                cmd = 'docker-compose -f '+e2e_path+'docker-compose-%s.yaml up %s.health.bgiblockchain.com' % (node,peer)
+                cmd = 'docker-compose -f '+e2e_path+'docker-compose-%s.yaml up %s.health.businessblockchain.com' % (node,peer)
                 print os.popen(cmd).readlines()
                 print time.strftime("\n%Y-%m-%d %H:%M:%S", time.localtime()), cmd
                 failedcnts[i] = 0 

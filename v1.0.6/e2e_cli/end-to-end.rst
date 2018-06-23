@@ -173,7 +173,7 @@ block - ``TwoOrgsOrdererGenesis`` - and one for our channel - ``TwoOrgsChannel``
 These headers are important, as we will pass them in as arguments when we create
 our artifacts.  This file also contains two additional specifications that are worth
 noting.  Firstly, we specify the anchor peers for each Peer Org
-(``peer0.health.bgiblockchain.com`` & ``peer0.health.bgiblockchain.com``).  Secondly, we point to
+(``peer0.health.businessblockchain.com`` & ``peer0.health.businessblockchain.com``).  Secondly, we point to
 the location of the MSP directory for each member, in turn allowing us to store the
 root certificates for each Org in the orderer genesis block.  This is a critical
 concept. Now any network entity communicating with the ordering service can have
@@ -330,14 +330,14 @@ You should see an output identical to the following:
 .. code:: bash
 
   CONTAINER ID        IMAGE                                 COMMAND                  CREATED             STATUS              PORTS                                              NAMES
-  b568de3fe931        dev-peer2.health.bgiblockchain.com-mycc-1.0   "chaincode -peer.a..."   4 minutes ago       Up 4 minutes                                                           dev-peer2.health.bgiblockchain.com-mycc-1.0
-  17c1c82087e7        dev-peer0.health.bgiblockchain.com-mycc-1.0   "chaincode -peer.a..."   4 minutes ago       Up 4 minutes                                                           dev-peer0.health.bgiblockchain.com-mycc-1.0
-  0e1c5034c47b        dev-peer0.health.bgiblockchain.com-mycc-1.0   "chaincode -peer.a..."   4 minutes ago       Up 4 minutes                                                           dev-peer0.health.bgiblockchain.com-mycc-1.0
-  71339e7e1d38        hyperledger/fabric-peer               "peer node start -..."   5 minutes ago       Up 5 minutes        0.0.0.0:8051->7051/tcp, 0.0.0.0:8053->7053/tcp     peer1.health.bgiblockchain.com
-  add6113ffdcf        hyperledger/fabric-peer               "peer node start -..."   5 minutes ago       Up 5 minutes        0.0.0.0:10051->7051/tcp, 0.0.0.0:10053->7053/tcp   peer2.health.bgiblockchain.com
-  689396c0e520        hyperledger/fabric-peer               "peer node start -..."   5 minutes ago       Up 5 minutes        0.0.0.0:7051->7051/tcp, 0.0.0.0:7053->7053/tcp     peer0.health.bgiblockchain.com
-  65424407a653        hyperledger/fabric-orderer            "orderer"                5 minutes ago       Up 5 minutes        0.0.0.0:7050->7050/tcp                             orderer0.bgiblockchain.com
-  ce14853db660        hyperledger/fabric-peer               "peer node start -..."   5 minutes ago       Up 5 minutes        0.0.0.0:9051->7051/tcp, 0.0.0.0:9053->7053/tcp     peer0.health.bgiblockchain.com
+  b568de3fe931        dev-peer2.health.businessblockchain.com-mycc-1.0   "chaincode -peer.a..."   4 minutes ago       Up 4 minutes                                                           dev-peer2.health.businessblockchain.com-mycc-1.0
+  17c1c82087e7        dev-peer0.health.businessblockchain.com-mycc-1.0   "chaincode -peer.a..."   4 minutes ago       Up 4 minutes                                                           dev-peer0.health.businessblockchain.com-mycc-1.0
+  0e1c5034c47b        dev-peer0.health.businessblockchain.com-mycc-1.0   "chaincode -peer.a..."   4 minutes ago       Up 4 minutes                                                           dev-peer0.health.businessblockchain.com-mycc-1.0
+  71339e7e1d38        hyperledger/fabric-peer               "peer node start -..."   5 minutes ago       Up 5 minutes        0.0.0.0:8051->7051/tcp, 0.0.0.0:8053->7053/tcp     peer1.health.businessblockchain.com
+  add6113ffdcf        hyperledger/fabric-peer               "peer node start -..."   5 minutes ago       Up 5 minutes        0.0.0.0:10051->7051/tcp, 0.0.0.0:10053->7053/tcp   peer2.health.businessblockchain.com
+  689396c0e520        hyperledger/fabric-peer               "peer node start -..."   5 minutes ago       Up 5 minutes        0.0.0.0:7051->7051/tcp, 0.0.0.0:7053->7053/tcp     peer0.health.businessblockchain.com
+  65424407a653        hyperledger/fabric-orderer            "orderer"                5 minutes ago       Up 5 minutes        0.0.0.0:7050->7050/tcp                             orderer0.businessblockchain.com
+  ce14853db660        hyperledger/fabric-peer               "peer node start -..."   5 minutes ago       Up 5 minutes        0.0.0.0:9051->7051/tcp, 0.0.0.0:9053->7053/tcp     peer0.health.businessblockchain.com
 
 If you set a moderately high ``TIMEOUT`` value, then you will see your cli
 container as well.
@@ -360,43 +360,43 @@ What's happening behind the scenes?
 -  Now we have a channel consisting of four peers, and two
    organizations.  This is our ``TwoOrgsChannel`` profile.
 
--  ``peer0.health.bgiblockchain.com`` and ``peer1.health.bgiblockchain.com`` belong to Health;
-   ``peer0.health.bgiblockchain.com`` and ``peer2.health.bgiblockchain.com`` belong to Org2
+-  ``peer0.health.businessblockchain.com`` and ``peer1.health.businessblockchain.com`` belong to Health;
+   ``peer0.health.businessblockchain.com`` and ``peer2.health.businessblockchain.com`` belong to Org2
 
 -  These relationships are defined through the ``crypto-config.yaml`` and
    the MSP path is specified in our docker compose.
 
--  The anchor peers for HealthMSP (``peer0.health.bgiblockchain.com``) and
-   Org2MSP (``peer0.health.bgiblockchain.com``) are then updated.  We do this by passing
+-  The anchor peers for HealthMSP (``peer0.health.businessblockchain.com``) and
+   Org2MSP (``peer0.health.businessblockchain.com``) are then updated.  We do this by passing
    the ``HealthMSPanchors.tx`` and ``Org2MSPanchors.tx`` artifacts to the ordering
    service along with the name of our channel.
 
--  A chaincode - **chaincode_example02** - is installed on ``peer0.health.bgiblockchain.com`` and
-   ``peer0.health.bgiblockchain.com``
+-  A chaincode - **chaincode_example02** - is installed on ``peer0.health.businessblockchain.com`` and
+   ``peer0.health.businessblockchain.com``
 
--  The chaincode is then "instantiated" on ``peer0.health.bgiblockchain.com``. Instantiation
+-  The chaincode is then "instantiated" on ``peer0.health.businessblockchain.com``. Instantiation
    adds the chaincode to the channel, starts the container for the target peer,
    and initializes the key value pairs associated with the chaincode.  The initial
    values for this example are ["a","100" "b","200"]. This "instantiation" results
-   in a container by the name of ``dev-peer0.health.bgiblockchain.com-mycc-1.0`` starting.
+   in a container by the name of ``dev-peer0.health.businessblockchain.com-mycc-1.0`` starting.
 
 -  The instantiation also passes in an argument for the endorsement
    policy. The policy is defined as
    ``-P "OR    ('HealthMSP.member','Org2MSP.member')"``, meaning that any
    transaction must be endorsed by a peer tied to Health or Org2.
 
--  A query against the value of "a" is issued to ``peer0.health.bgiblockchain.com``. The
-   chaincode was previously installed on ``peer0.health.bgiblockchain.com``, so this will start
-   a container for Health peer0 by the name of ``dev-peer0.health.bgiblockchain.com-mycc-1.0``. The result
+-  A query against the value of "a" is issued to ``peer0.health.businessblockchain.com``. The
+   chaincode was previously installed on ``peer0.health.businessblockchain.com``, so this will start
+   a container for Health peer0 by the name of ``dev-peer0.health.businessblockchain.com-mycc-1.0``. The result
    of the query is also returned. No write operations have occurred, so
    a query against "a" will still return a value of "100".
 
--  An invoke is sent to ``peer0.health.bgiblockchain.com`` to move "10" from "a" to "b"
+-  An invoke is sent to ``peer0.health.businessblockchain.com`` to move "10" from "a" to "b"
 
--  The chaincode is then installed on ``peer2.health.bgiblockchain.com``
+-  The chaincode is then installed on ``peer2.health.businessblockchain.com``
 
--  A query is sent to ``peer2.health.bgiblockchain.com`` for the value of "a". This starts a
-   third chaincode container by the name of ``dev-peer2.health.bgiblockchain.com-mycc-1.0``. A
+-  A query is sent to ``peer2.health.businessblockchain.com`` for the value of "a". This starts a
+   third chaincode container by the name of ``dev-peer2.health.businessblockchain.com-mycc-1.0``. A
    value of 90 is returned, correctly reflecting the previous
    transaction during which the value for key "a" was modified by 10.
 
@@ -412,8 +412,8 @@ all peers in a channel maintain an exact copy of the ledger which
 comprises the blockchain to store the immutable, sequenced record in
 blocks, as well as a state database to maintain current fabric state.
 This includes those peers that do not have chaincode installed on them
-(like ``peer1.health.bgiblockchain.com`` in the above example) . Finally, the chaincode is accessible
-after it is installed (like ``peer2.health.bgiblockchain.com`` in the above example) because it
+(like ``peer1.health.businessblockchain.com`` in the above example) . Finally, the chaincode is accessible
+after it is installed (like ``peer2.health.businessblockchain.com`` in the above example) because it
 has already been instantiated.
 
 How do I see these transactions?
@@ -455,19 +455,19 @@ output from each container:
 
 .. code:: bash
 
-    $ docker logs dev-peer0.health.bgiblockchain.com-mycc-1.0
+    $ docker logs dev-peer0.health.businessblockchain.com-mycc-1.0
     04:30:45.947 [BCCSP_FACTORY] DEBU : Initialize BCCSP [SW]
     ex02 Init
     Aval = 100, Bval = 200
 
-    $ docker logs dev-peer0.health.bgiblockchain.com-mycc-1.0
+    $ docker logs dev-peer0.health.businessblockchain.com-mycc-1.0
     04:31:10.569 [BCCSP_FACTORY] DEBU : Initialize BCCSP [SW]
     ex02 Invoke
     Query Response:{"Name":"a","Amount":"100"}
     ex02 Invoke
     Aval = 90, Bval = 210
 
-    $ docker logs dev-peer2.health.bgiblockchain.com-mycc-1.0
+    $ docker logs dev-peer2.health.businessblockchain.com-mycc-1.0
     04:31:30.420 [BCCSP_FACTORY] DEBU : Initialize BCCSP [SW]
     ex02 Invoke
     Query Response:{"Name":"a","Amount":"90"}
@@ -510,9 +510,9 @@ If you want to use the ``docker-compose-e2e.yaml`` without first running the
 **All in one** script, then we  will need to make four slight modifications.
 We need to point to the private keys for our Organization's CA's.  You can locate
 these values in your crypto-config folder.  For example, to locate the private
-key for Health we would follow this path - ``crypto-config/peerOrganizations/health.bgiblockchain.com/ca/``.
+key for Health we would follow this path - ``crypto-config/peerOrganizations/health.businessblockchain.com/ca/``.
 The private key is a long hash value followed by ``_sk``.  The path for Org2
-would be - ``crypto-config/peerOrganizations/health.bgiblockchain.com/ca/``.
+would be - ``crypto-config/peerOrganizations/health.businessblockchain.com/ca/``.
 
 In the ``docker-compose-e2e.yaml`` update the FABRIC_CA_SERVER_TLS_KEYFILE variable
 for ca0 and ca1.  You also need to edit the path that is provided in the command
@@ -534,9 +534,9 @@ chaincode images. They will look similar to the following:
 .. code:: bash
 
   REPOSITORY                            TAG                              IMAGE ID            CREATED             SIZE
-  dev-peer2.health.bgiblockchain.com-mycc-1.0   latest                           4bc5e9b5dd97        5 seconds ago       176 MB
-  dev-peer0.health.bgiblockchain.com-mycc-1.0   latest                           6f2aeb032076        22 seconds ago      176 MB
-  dev-peer0.health.bgiblockchain.com-mycc-1.0   latest                           509b8e393cc6        39 seconds ago      176 MB
+  dev-peer2.health.businessblockchain.com-mycc-1.0   latest                           4bc5e9b5dd97        5 seconds ago       176 MB
+  dev-peer0.health.businessblockchain.com-mycc-1.0   latest                           6f2aeb032076        22 seconds ago      176 MB
+  dev-peer0.health.businessblockchain.com-mycc-1.0   latest                           509b8e393cc6        39 seconds ago      176 MB
 
 Remove these images:
 
@@ -587,9 +587,9 @@ Command syntax
 
 Refer to the create and join commands in the ``script.sh`` for the exact syntax.
 
-For the following CLI commands against `peer0.health.bgiblockchain.com` to work, we need
+For the following CLI commands against `peer0.health.businessblockchain.com` to work, we need
 to preface our commands with the four environment variables given below.  These
-variables for ``peer0.health.bgiblockchain.com`` are baked into the CLI container,
+variables for ``peer0.health.businessblockchain.com`` are baked into the CLI container,
 therefore we can operate without passing them.  **HOWEVER**, if you want to send
 calls to other peers or the orderer, then you will need to provide these
 values accordingly.  Inspect the ``docker-compose-base.yaml`` for the specific
@@ -599,10 +599,10 @@ paths:
 
     # Environment variables for PEER0
 
-    CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/health.bgiblockchain.com/users/Admin@health.bgiblockchain.com/msp
-    CORE_PEER_ADDRESS=peer0.health.bgiblockchain.com:7051
+    CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/health.businessblockchain.com/users/Admin@health.businessblockchain.com/msp
+    CORE_PEER_ADDRESS=peer0.health.businessblockchain.com:7051
     CORE_PEER_LOCALMSPID="HealthMSP"
-    CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/health.bgiblockchain.com/peers/peer0.health.bgiblockchain.com/tls/ca.crt
+    CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/health.businessblockchain.com/peers/peer0.health.businessblockchain.com/tls/ca.crt
 
 Create channel
 ^^^^^^^^^^^^^^
@@ -631,13 +631,13 @@ with a different name.
     # we also pass the path for the orderer ca-cert in order to verify the TLS handshake
     # be sure to replace the $CHANNEL_NAME variable appropriately
 
-    peer channel create -o orderer0.bgiblockchain.com:7050 -c $CHANNEL_NAME -f ./channel-artifacts/channel.tx --tls $CORE_PEER_TLS_ENABLED --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/bgiblockchain.com/orderers/orderer0.bgiblockchain.com/msp/cacerts/ca.bgiblockchain.com-cert.pem
+    peer channel create -o orderer0.businessblockchain.com:7050 -c $CHANNEL_NAME -f ./channel-artifacts/channel.tx --tls $CORE_PEER_TLS_ENABLED --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/businessblockchain.com/orderers/orderer0.businessblockchain.com/msp/cacerts/ca.businessblockchain.com-cert.pem
 
 
 .. note:: You will remain in the CLI container for the remainder of
           these manual commands. You must also remember to preface all commands
           with the corresponding environment variables when targeting a peer other than
-          ``peer0.health.bgiblockchain.com``.
+          ``peer0.health.businessblockchain.com``.
 
 Join channel
 ^^^^^^^^^^^^
@@ -646,7 +646,7 @@ Join specific peers to the channel
 
 .. code:: bash
 
-    # By default, this joins ``peer0.health.bgiblockchain.com`` only
+    # By default, this joins ``peer0.health.businessblockchain.com`` only
     # the channel.block was returned by the previous command
 
      peer channel join -b <YOUR_CHANNEL.block>
@@ -677,7 +677,7 @@ The command is:
     # be sure to replace the $CHANNEL_NAME environment variable
     # if you did not install your chaincode with a name of mycc, then modify that argument as well
 
-    peer chaincode instantiate -o orderer0.bgiblockchain.com:7050 --tls $CORE_PEER_TLS_ENABLED --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/bgiblockchain.com/orderers/orderer0.bgiblockchain.com/msp/cacerts/ca.bgiblockchain.com-cert.pem -C $CHANNEL_NAME -n mycc -v 1.0 -p github.com/hyperledger/fabric/examples/chaincode/go/chaincode_example02 -c '{"Args":["init","a", "100", "b","200"]}' -P "OR ('HealthMSP.member','Org2MSP.member')"
+    peer chaincode instantiate -o orderer0.businessblockchain.com:7050 --tls $CORE_PEER_TLS_ENABLED --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/businessblockchain.com/orderers/orderer0.businessblockchain.com/msp/cacerts/ca.businessblockchain.com-cert.pem -C $CHANNEL_NAME -n mycc -v 1.0 -p github.com/hyperledger/fabric/examples/chaincode/go/chaincode_example02 -c '{"Args":["init","a", "100", "b","200"]}' -P "OR ('HealthMSP.member','Org2MSP.member')"
 
 See the `endorsement
 policies <http://hyperledger-fabric.readthedocs.io/en/latest/endorsement-policies.html>`__
@@ -689,7 +689,7 @@ Invoke chaincode
 .. code:: bash
 
     # be sure to set the -C and -n flags appropriately
-    peer chaincode invoke -o orderer0.bgiblockchain.com:7050  --tls $CORE_PEER_TLS_ENABLED --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/bgiblockchain.com/orderers/orderer0.bgiblockchain.com/msp/cacerts/ca.bgiblockchain.com-cert.pem  -C $CHANNEL_NAME -n mycc -c '{"Args":["invoke","a","b","10"]}'
+    peer chaincode invoke -o orderer0.businessblockchain.com:7050  --tls $CORE_PEER_TLS_ENABLED --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/businessblockchain.com/orderers/orderer0.businessblockchain.com/msp/cacerts/ca.businessblockchain.com-cert.pem  -C $CHANNEL_NAME -n mycc -c '{"Args":["invoke","a","b","10"]}'
 
 Make sure to wait a few seconds for the operation to complete.
 
@@ -748,14 +748,14 @@ We will follow the same process to create and join the channel as outlined in th
 peer(s) to the channel, use the following steps to interact with the **marbles02**
 chaincode:
 
--  Install and instantiate the chaincode on ``peer0.health.bgiblockchain.com``:
+-  Install and instantiate the chaincode on ``peer0.health.businessblockchain.com``:
 
 .. code:: bash
 
        # be sure to modify the $CHANNEL_NAME variable accordingly for the instantiate command
 
-       peer chaincode install -o orderer0.bgiblockchain.com:7050 -n marbles -v 1.0 -p github.com/hyperledger/fabric/examples/chaincode/go/marbles02
-       peer chaincode instantiate -o orderer0.bgiblockchain.com:7050 --tls $CORE_PEER_TLS_ENABLED --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/bgiblockchain.com/orderers/orderer0.bgiblockchain.com/msp/cacerts/ca.bgiblockchain.com-cert.pem -C $CHANNEL_NAME -n marbles -v 1.0 -p github.com/hyperledger/fabric/examples/chaincode/go/marbles02 -c '{"Args":["init"]}' -P "OR ('Org0MSP.member','HealthMSP.member')"
+       peer chaincode install -o orderer0.businessblockchain.com:7050 -n marbles -v 1.0 -p github.com/hyperledger/fabric/examples/chaincode/go/marbles02
+       peer chaincode instantiate -o orderer0.businessblockchain.com:7050 --tls $CORE_PEER_TLS_ENABLED --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/businessblockchain.com/orderers/orderer0.businessblockchain.com/msp/cacerts/ca.businessblockchain.com-cert.pem -C $CHANNEL_NAME -n marbles -v 1.0 -p github.com/hyperledger/fabric/examples/chaincode/go/marbles02 -c '{"Args":["init"]}' -P "OR ('Org0MSP.member','HealthMSP.member')"
 
 -  Create some marbles and move them around:
 
@@ -763,12 +763,12 @@ chaincode:
 
         # be sure to modify the $CHANNEL_NAME variable accordingly
 
-        peer chaincode invoke -o orderer0.bgiblockchain.com:7050 --tls $CORE_PEER_TLS_ENABLED --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/bgiblockchain.com/orderers/orderer0.bgiblockchain.com/msp/cacerts/ca.bgiblockchain.com-cert.pem -C $CHANNEL_NAME -n marbles -c '{"Args":["initMarble","marble1","blue","35","tom"]}'
-        peer chaincode invoke -o orderer0.bgiblockchain.com:7050 --tls $CORE_PEER_TLS_ENABLED --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/bgiblockchain.com/orderers/orderer0.bgiblockchain.com/msp/cacerts/ca.bgiblockchain.com-cert.pem -C $CHANNEL_NAME -n marbles -c '{"Args":["initMarble","marble2","red","50","tom"]}'
-        peer chaincode invoke -o orderer0.bgiblockchain.com:7050 --tls $CORE_PEER_TLS_ENABLED --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/bgiblockchain.com/orderers/orderer0.bgiblockchain.com/msp/cacerts/ca.bgiblockchain.com-cert.pem -C $CHANNEL_NAME -n marbles -c '{"Args":["initMarble","marble3","blue","70","tom"]}'
-        peer chaincode invoke -o orderer0.bgiblockchain.com:7050 --tls $CORE_PEER_TLS_ENABLED --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/bgiblockchain.com/orderers/orderer0.bgiblockchain.com/msp/cacerts/ca.bgiblockchain.com-cert.pem -C $CHANNEL_NAME -n marbles -c '{"Args":["transferMarble","marble2","jerry"]}'
-        peer chaincode invoke -o orderer0.bgiblockchain.com:7050 --tls $CORE_PEER_TLS_ENABLED --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/bgiblockchain.com/orderers/orderer0.bgiblockchain.com/msp/cacerts/ca.bgiblockchain.com-cert.pem -C $CHANNEL_NAME -n marbles -c '{"Args":["transferMarblesBasedOnColor","blue","jerry"]}'
-        peer chaincode invoke -o orderer0.bgiblockchain.com:7050 --tls $CORE_PEER_TLS_ENABLED --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/bgiblockchain.com/orderers/orderer0.bgiblockchain.com/msp/cacerts/ca.bgiblockchain.com-cert.pem -C $CHANNEL_NAME -n marbles -c '{"Args":["delete","marble1"]}'
+        peer chaincode invoke -o orderer0.businessblockchain.com:7050 --tls $CORE_PEER_TLS_ENABLED --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/businessblockchain.com/orderers/orderer0.businessblockchain.com/msp/cacerts/ca.businessblockchain.com-cert.pem -C $CHANNEL_NAME -n marbles -c '{"Args":["initMarble","marble1","blue","35","tom"]}'
+        peer chaincode invoke -o orderer0.businessblockchain.com:7050 --tls $CORE_PEER_TLS_ENABLED --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/businessblockchain.com/orderers/orderer0.businessblockchain.com/msp/cacerts/ca.businessblockchain.com-cert.pem -C $CHANNEL_NAME -n marbles -c '{"Args":["initMarble","marble2","red","50","tom"]}'
+        peer chaincode invoke -o orderer0.businessblockchain.com:7050 --tls $CORE_PEER_TLS_ENABLED --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/businessblockchain.com/orderers/orderer0.businessblockchain.com/msp/cacerts/ca.businessblockchain.com-cert.pem -C $CHANNEL_NAME -n marbles -c '{"Args":["initMarble","marble3","blue","70","tom"]}'
+        peer chaincode invoke -o orderer0.businessblockchain.com:7050 --tls $CORE_PEER_TLS_ENABLED --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/businessblockchain.com/orderers/orderer0.businessblockchain.com/msp/cacerts/ca.businessblockchain.com-cert.pem -C $CHANNEL_NAME -n marbles -c '{"Args":["transferMarble","marble2","jerry"]}'
+        peer chaincode invoke -o orderer0.businessblockchain.com:7050 --tls $CORE_PEER_TLS_ENABLED --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/businessblockchain.com/orderers/orderer0.businessblockchain.com/msp/cacerts/ca.businessblockchain.com-cert.pem -C $CHANNEL_NAME -n marbles -c '{"Args":["transferMarblesBasedOnColor","blue","jerry"]}'
+        peer chaincode invoke -o orderer0.businessblockchain.com:7050 --tls $CORE_PEER_TLS_ENABLED --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/businessblockchain.com/orderers/orderer0.businessblockchain.com/msp/cacerts/ca.businessblockchain.com-cert.pem -C $CHANNEL_NAME -n marbles -c '{"Args":["delete","marble1"]}'
 
 
 -  If you chose to map the CouchDB ports in docker-compose, you can now view
@@ -869,8 +869,8 @@ Troubleshooting
 
        Error: Error endorsing chaincode: rpc error: code = 2 desc = Error installing chaincode code mycc:1.0(chaincode /var/hyperledger/production/chaincodes/mycc.1.0 exits)
 
-You likely have chaincode images (e.g. ``dev-peer2.health.bgiblockchain.com-mycc-1.0`` or
-``dev-peer0.health.bgiblockchain.com-mycc-1.0``) from prior runs. Remove them and try
+You likely have chaincode images (e.g. ``dev-peer2.health.businessblockchain.com-mycc-1.0`` or
+``dev-peer0.health.businessblockchain.com-mycc-1.0``) from prior runs. Remove them and try
 again.
 
 .. code:: bash

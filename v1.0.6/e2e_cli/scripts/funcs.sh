@@ -12,13 +12,20 @@ echo "|____/    |_|   /_/   \_\ |_| \_\   |_|           |_____| |_____| |_____|"
 echo
 
 CHANNEL_NAME="$1"
-: ${CHANNEL_NAME:="bgilifechain"}
 : ${TIMEOUT:="60"}
 COUNTER=1
 MAX_RETRY=5
-ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/bgiblockchain.com/orderers/orderer0.bgiblockchain.com/msp/tlscacerts/tlsca.bgiblockchain.com-cert.pem
+ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/businessblockchain.com/orderers/orderer0.businessblockchain.com/msp/tlscacerts/tlsca.businessblockchain.com-cert.pem
 
-echo "Channel name : "$CHANNEL_NAME
+echo ">>> Channel name : "$CHANNEL_NAME
+
+
+function validateArgs () {
+	if [ -z "${CHANNEL_NAME}" ]; then
+				echo "arg1should not be empty,arg1 for channel name"
+		exit 1
+	fi
+}
 
 verifyResult () {
 	if [ $1 -ne 0 ] ; then
@@ -30,40 +37,34 @@ verifyResult () {
 }
 
 setGlobals () {
-
-#	if [ $1 -eq 0 -o $1 -eq 1 ] ; then
 		CORE_PEER_LOCALMSPID="HealthMSP"
-		CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/health.bgiblockchain.com/peers/peer0.health.bgiblockchain.com/tls/ca.crt
-		CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/health.bgiblockchain.com/users/Admin@health.bgiblockchain.com/msp
+		CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/health.businessblockchain.com/peers/peer0.health.businessblockchain.com/tls/ca.crt
+		CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/health.businessblockchain.com/users/Admin@health.businessblockchain.com/msp
 		if [ $1 -eq 0 ]; then 
-			CORE_PEER_ADDRESS=peer0.health.bgiblockchain.com:7051
+			CORE_PEER_ADDRESS=peer0.health.businessblockchain.com:7051
 		elif [ $1 -eq 1 ]; then
-			CORE_PEER_ADDRESS=peer1.health.bgiblockchain.com:7051
+			CORE_PEER_ADDRESS=peer1.health.businessblockchain.com:7051
 		elif [ $1 -eq 2 ]; then
-			CORE_PEER_ADDRESS=peer2.health.bgiblockchain.com:7151
+			CORE_PEER_ADDRESS=peer2.health.businessblockchain.com:7151
 		elif [ $1 -eq 3 ]; then
-			CORE_PEER_ADDRESS=peer3.health.bgiblockchain.com:7151
+			CORE_PEER_ADDRESS=peer3.health.businessblockchain.com:7151
 		elif [ $1 -eq 4 ]; then
-			CORE_PEER_ADDRESS=peer4.health.bgiblockchain.com:7251
+			CORE_PEER_ADDRESS=peer4.health.businessblockchain.com:7251
 		elif [ $1 -eq 5 ]; then
-			CORE_PEER_ADDRESS=peer5.health.bgiblockchain.com:7251
+			CORE_PEER_ADDRESS=peer5.health.businessblockchain.com:7251
 		elif [ $1 -eq 6 ]; then
-			CORE_PEER_ADDRESS=peer6.health.bgiblockchain.com:7351
+			CORE_PEER_ADDRESS=peer6.health.businessblockchain.com:7351
 		elif [ $1 -eq 7 ]; then
-			CORE_PEER_ADDRESS=peer7.health.bgiblockchain.com:7351
-		elif [ $1 -eq 9 ]; then
-			CORE_PEER_ADDRESS=peer9.health.bgiblockchain.com:7451
+			CORE_PEER_ADDRESS=peer7.health.businessblockchain.com:7351
+		elif [ $1 -eq 10 ]; then
+			CORE_PEER_ADDRESS=peer10.health.businessblockchain.com:7051
+		elif [ $1 -eq 11 ]; then
+			CORE_PEER_ADDRESS=peer11.health.businessblockchain.com:7151
+		elif [ $1 -eq 12 ]; then
+			CORE_PEER_ADDRESS=peer12.health.businessblockchain.com:7251
+		elif [ $1 -eq 13 ]; then
+			CORE_PEER_ADDRESS=peer13.health.businessblockchain.com:7351	
 		fi
-#	else
-#		CORE_PEER_LOCALMSPID="Org2MSP"
-#		CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/health.bgiblockchain.com/peers/peer0.health.bgiblockchain.com/tls/ca.crt
-#		CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/health.bgiblockchain.com/users/Admin@health.bgiblockchain.com/msp
-#		if [ $1 -eq 2 ]; then
-#			CORE_PEER_ADDRESS=peer0.health.bgiblockchain.com:7051
-#		else
-#			CORE_PEER_ADDRESS=peer2.health.bgiblockchain.com:8051
-#		fi
-#	fi
 
 	env |grep CORE
 }
@@ -72,9 +73,9 @@ createChannel() {
 	setGlobals 0
 
         if [ -z "$CORE_PEER_TLS_ENABLED" -o "$CORE_PEER_TLS_ENABLED" = "false" ]; then
-		peer channel create -o orderer0.bgiblockchain.com:7050 -c $CHANNEL_NAME -f ./channel-artifacts/channel.tx >&log.txt
+		peer channel create -o orderer0.businessblockchain.com:7050 -c $CHANNEL_NAME -f ./channel-artifacts/channel.tx >&log.txt
 	else
-		peer channel create -o orderer0.bgiblockchain.com:7050 -c $CHANNEL_NAME -f ./channel-artifacts/channel.tx --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA >&log.txt
+		peer channel create -o orderer0.businessblockchain.com:7050 -c $CHANNEL_NAME -f ./channel-artifacts/channel.tx --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA >&log.txt
 	fi
 	res=$?
 	cat log.txt
@@ -88,9 +89,9 @@ updateAnchorPeers() {
         setGlobals $PEER
 
         if [ -z "$CORE_PEER_TLS_ENABLED" -o "$CORE_PEER_TLS_ENABLED" = "false" ]; then
-		peer channel update -o orderer0.bgiblockchain.com:7050 -c $CHANNEL_NAME -f ./channel-artifacts/${CORE_PEER_LOCALMSPID}anchors.tx >&log.txt
+		peer channel update -o orderer0.businessblockchain.com:7050 -c $CHANNEL_NAME -f ./channel-artifacts/${CORE_PEER_LOCALMSPID}anchors.tx >&log.txt
 	else
-		peer channel update -o orderer0.bgiblockchain.com:7050 -c $CHANNEL_NAME -f ./channel-artifacts/${CORE_PEER_LOCALMSPID}anchors.tx --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA >&log.txt
+		peer channel update -o orderer0.businessblockchain.com:7050 -c $CHANNEL_NAME -f ./channel-artifacts/${CORE_PEER_LOCALMSPID}anchors.tx --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA >&log.txt
 	fi
 	res=$?
 	cat log.txt
@@ -117,7 +118,8 @@ joinWithRetry () {
 }
 
 joinChannel () {
-	for ch in 0 1 2 3 4 5 6 7; do
+#	for ch in 0 1 2 3; do
+	for ch in 10 11 12 13; do
 		setGlobals $ch
 		joinWithRetry $ch
 		echo "===================== PEER$ch joined on the channel \"$CHANNEL_NAME\" ===================== "
@@ -137,15 +139,27 @@ installChaincode () {
 	echo
 }
 
+
+upgradeChaincode () {
+	PEER=$1
+	setGlobals $PEER
+#	peer chaincode upgrade -o orderer0.businessblockchain.com:7050 --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n mycc -v 2.0 -p github.com/hyperledger/fabric/examples/chaincode/go/chaincode_bgi  -c '{"Args":[""]}' -P "OR	('HealthMSP.member')" >&log.txt
+	res=$?
+	cat log.txt
+        verifyResult $res "Chaincode installation on remote peer PEER$PEER has Failed"
+	echo "===================== Chaincode is installed on remote peer PEER$PEER ===================== "
+	echo
+}
+
 instantiateChaincode () {
 	PEER=$1
 	setGlobals $PEER
 	# while 'peer chaincode' command can get the orderer endpoint from the peer (if join was successful),
 	# lets supply it directly as we know it using the "-o" option
 	if [ -z "$CORE_PEER_TLS_ENABLED" -o "$CORE_PEER_TLS_ENABLED" = "false" ]; then
-		peer chaincode instantiate -o orderer0.bgiblockchain.com:7050 -C $CHANNEL_NAME -n mycc -v 1.0 -c '{"Args":["init","a","100","b","200"]}' -P "OR	('HealthMSP.member')" >&log.txt
+		peer chaincode instantiate -o orderer0.businessblockchain.com:7050 -C $CHANNEL_NAME -n mycc -v 1.0 -c '{"Args":["init","a","100","b","200"]}' -P "OR	('HealthMSP.member')" >&log.txt
 	else
-		peer chaincode instantiate -o orderer0.bgiblockchain.com:7050 --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n mycc -v 1.0 -c '{"Args":["init","a","100","b","200"]}' -P "OR	('HealthMSP.member')" >&log.txt
+		peer chaincode instantiate -o orderer0.businessblockchain.com:7050 --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n mycc -v 1.0 -c '{"Args":["init","a","100","b","200"]}' -P "OR	('HealthMSP.member')" >&log.txt
 	fi
 	res=$?
 	cat log.txt
@@ -189,9 +203,9 @@ chaincodeInvoke () {
 	# while 'peer chaincode' command can get the orderer endpoint from the peer (if join was successful),
 	# lets supply it directly as we know it using the "-o" option
 	if [ -z "$CORE_PEER_TLS_ENABLED" -o "$CORE_PEER_TLS_ENABLED" = "false" ]; then
-		peer chaincode invoke -o orderer0.bgiblockchain.com:7050 -C $CHANNEL_NAME -n mycc -c '{"Args":["invoke","a","b","10"]}' >&log.txt
+		peer chaincode invoke -o orderer0.businessblockchain.com:7050 -C $CHANNEL_NAME -n mycc -c '{"Args":["invoke","a","b","10"]}' >&log.txt
 	else
-		peer chaincode invoke -o orderer0.bgiblockchain.com:7050  --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n mycc -c '{"Args":["invoke","a","b","10"]}' >&log.txt
+		peer chaincode invoke -o orderer0.businessblockchain.com:7050  --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n mycc -c '{"Args":["invoke","a","b","10"]}' >&log.txt
 	fi
 	res=$?
 	cat log.txt
@@ -200,50 +214,51 @@ chaincodeInvoke () {
 	echo
 }
 
-## Create channel
-echo "Creating channel..."
-createChannel
+### Create channel
+#echo "Creating channel..."
+#createChannel
+
+validateArgs
 
 ## Join all the peers to the channel
 echo "Having all peers join the channel..."
-joinChannel
+#joinChannel
 
-## Set the anchor peers for each org in the channel
-echo "Updating anchor peers for org1..."
-updateAnchorPeers 0
-echo "Updating anchor peers for org2..."
-#updateAnchorPeers 2
+### Set the anchor peers for each org in the channel
+#echo "Updating anchor peers for org1..."
+#updateAnchorPeers 0
+#echo "Updating anchor peers for org2..."
+##updateAnchorPeers 2
 
-## Install chaincode on Peer0/Health and Peer2/Org2
-echo "Installing chaincode on org1/peer0..."
-installChaincode 0
-echo "Install chaincode on org2/peer2..."
-installChaincode 2
+### Install chaincode on Peer0/Health and Peer2/Org2
+#echo "Installing chaincode on org1/peer0..."
+#installChaincode 0
+#echo "Install chaincode on org2/peer2..."
+#installChaincode 3
 
-#Instantiate chaincode on Peer2/Org2
-echo "Instantiating chaincode on org2/peer2..."
-instantiateChaincode 2
+##Instantiate chaincode on Peer2/Org2
+#echo "Instantiating chaincode on org2/peer2..."
+#instantiateChaincode 3
 
-#Query on chaincode on Peer0/Health
-echo "Querying chaincode on org1/peer0..."
-chaincodeQuery 0 100
+##Query on chaincode on Peer0/Health
+#echo "Querying chaincode on org1/peer0..."
+#chaincodeQuery 0 100
 
-#Invoke on chaincode on Peer0/Health
-echo "Sending invoke transaction on org1/peer0..."
-chaincodeInvoke 0
+##Invoke on chaincode on Peer0/Health
+#echo "Sending invoke transaction on org1/peer0..."
+#chaincodeInvoke 0
 
-## Install chaincode on Peer3/Org2
-echo "Installing chaincode on org2/peer3..."
-installChaincode 1
-installChaincode 3
-installChaincode 4
-installChaincode 5
-installChaincode 6
-installChaincode 7
+### Install chaincode on Peer3/Org2
+#echo "Installing chaincode on org2/peer3..."
+upgradeChaincode 10
+upgradeChaincode 11
+upgradeChaincode 12
+upgradeChaincode 13
+#installChaincode 2
 
-#Query on chaincode on Peer3/Org2, check if the result is 90
-echo "Querying chaincode on org2/peer3..."
-chaincodeQuery 1 90
+##Query on chaincode on Peer3/Org2, check if the result is 90
+#echo "Querying chaincode on org2/peer3..."
+#chaincodeQuery 3 90
 
 echo
 echo "===================== All GOOD, End-2-End execution completed ===================== "

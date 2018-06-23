@@ -1,0 +1,132 @@
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+version: '2'
+
+services:
+  peer10.health.businessblockchain.com:
+    container_name: peer10.health.businessblockchain.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer10.health.businessblockchain.com
+      - CORE_PEER_ADDRESS=peer10.health.businessblockchain.com:7051
+      - CORE_PEER_LISTENADDRESS=peer10.health.businessblockchain.com:7051
+      - CORE_PEER_CHAINCODELISTENADDRESS=peer10.health.businessblockchain.com:7052
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer10.health.businessblockchain.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.health.businessblockchain.com:7051
+      - CORE_PEER_LOCALMSPID=HealthMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/health.businessblockchain.com/peers/peer10.health.businessblockchain.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/health.businessblockchain.com/peers/peer10.health.businessblockchain.com/tls:/etc/hyperledger/fabric/tls
+        - /bgi/blockchain_data/peer10/pro/:/var/hyperledger/production/
+        - /bgi/blockchain_data/peer10/logs/:/opt/gopath/src/github.com/hyperledger/fabric/peer
+    ports:
+      - 7051:7051
+      - 7052:7052
+      - 7053:7053
+      - 8006:9000
+
+  peer11.health.businessblockchain.com:
+    container_name: peer11.health.businessblockchain.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer11.health.businessblockchain.com
+      - CORE_PEER_ADDRESS=peer11.health.businessblockchain.com:7151
+      - CORE_PEER_LISTENADDRESS=peer11.health.businessblockchain.com:7151
+      - CORE_PEER_CHAINCODELISTENADDRESS=peer11.health.businessblockchain.com:7152
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer11.health.businessblockchain.com:7151
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.health.businessblockchain.com:7051
+      - CORE_PEER_LOCALMSPID=HealthMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/health.businessblockchain.com/peers/peer11.health.businessblockchain.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/health.businessblockchain.com/peers/peer11.health.businessblockchain.com/tls:/etc/hyperledger/fabric/tls
+        - /bgi/blockchain_data/peer11/pro/:/var/hyperledger/production/
+        - /bgi/blockchain_data/peer11/logs/:/opt/gopath/src/github.com/hyperledger/fabric/peer
+    ports:
+      - 7151:7151
+      - 7152:7152
+      - 7153:7153
+      - 8016:9000    
+
+  peer12.health.businessblockchain.com:
+    container_name: peer12.health.businessblockchain.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer12.health.businessblockchain.com
+      - CORE_PEER_ADDRESS=peer12.health.businessblockchain.com:7251
+      - CORE_PEER_LISTENADDRESS=peer12.health.businessblockchain.com:7251
+      - CORE_PEER_CHAINCODELISTENADDRESS=peer12.health.businessblockchain.com:722
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer12.health.businessblockchain.com:7251
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.health.businessblockchain.com:7051
+      - CORE_PEER_LOCALMSPID=HealthMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/health.businessblockchain.com/peers/peer12.health.businessblockchain.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/health.businessblockchain.com/peers/peer12.health.businessblockchain.com/tls:/etc/hyperledger/fabric/tls
+        - /bgi/blockchain_data/peer12/pro/:/var/hyperledger/production/
+        - /bgi/blockchain_data/peer12/logs/:/opt/gopath/src/github.com/hyperledger/fabric/peer
+    ports:
+      - 7251:7251
+      - 7252:7252
+      - 7253:7253
+      - 8026:9000      
+
+  peer13.health.businessblockchain.com:
+    container_name: peer13.health.businessblockchain.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer13.health.businessblockchain.com
+      - CORE_PEER_ADDRESS=peer13.health.businessblockchain.com:7351
+      - CORE_PEER_LISTENADDRESS=peer13.health.businessblockchain.com:7351
+      - CORE_PEER_CHAINCODELISTENADDRESS=peer13.health.businessblockchain.com:7352
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer13.health.businessblockchain.com:7351
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.health.businessblockchain.com:7051
+      - CORE_PEER_LOCALMSPID=HealthMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/health.businessblockchain.com/peers/peer13.health.businessblockchain.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/health.businessblockchain.com/peers/peer13.health.businessblockchain.com/tls:/etc/hyperledger/fabric/tls
+        - /bgi/blockchain_data/peer13/pro/:/var/hyperledger/production/
+        - /bgi/blockchain_data/peer13/logs/:/opt/gopath/src/github.com/hyperledger/fabric/peer
+    ports:
+      - 7351:7351
+      - 7352:7352
+      - 7353:7353
+      - 8036:9000         
+
+  #peer9.health.businessblockchain.com:
+  #  container_name: peer9.health.businessblockchain.com
+  #  extends:
+  #    file: peer-base.yaml
+  #    service: peer-base
+  #  environment:
+  #    - CORE_PEER_ID=peer9.health.businessblockchain.com
+  #    - CORE_PEER_ADDRESS=peer9.health.businessblockchain.com:7451
+  #    - CORE_PEER_LISTENADDRESS=peer9.health.businessblockchain.com:7451
+  #    - CORE_PEER_CHAINCODELISTENADDRESS=peer9.health.businessblockchain.com:7452
+  #    - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer9.health.businessblockchain.com:7451
+  #    - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.health.businessblockchain.com:7051
+  #    - CORE_PEER_LOCALMSPID=HealthMSP
+  #  volumes:
+  #      - /var/run/:/host/var/run/
+  #      - ../crypto-config/peerOrganizations/health.businessblockchain.com/peers/peer9.health.businessblockchain.com/msp:/etc/hyperledger/fabric/msp
+  #      - ../crypto-config/peerOrganizations/health.businessblockchain.com/peers/peer9.health.businessblockchain.com/tls:/etc/hyperledger/fabric/tls
+  #      - /bgi/blockchain_data/peer9/pro/:/var/hyperledger/production/
+  #      - /bgi/blockchain_data/peer9/logs/:/opt/gopath/src/github.com/hyperledger/fabric/peer
+  #  ports:
+  #    - 7451:7451
+  #    - 7452:7452
+  #    - 7453:7453
+  #    - 8046:9000

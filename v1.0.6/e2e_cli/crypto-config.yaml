@@ -11,7 +11,7 @@ OrdererOrgs:
   # Orderer
   # ---------------------------------------------------------------------------
   - Name: Orderer
-    Domain: bgiblockchain.com
+    Domain: businessblockchain.com
     # ---------------------------------------------------------------------------
     # "Specs" - See PeerOrgs below for complete description
     # ---------------------------------------------------------------------------
@@ -28,7 +28,7 @@ PeerOrgs:
   # Health
   # ---------------------------------------------------------------------------
   - Name: Health
-    Domain: health.bgiblockchain.com
+    Domain: health.businessblockchain.com
     # ---------------------------------------------------------------------------
     # "Specs"
     # ---------------------------------------------------------------------------
@@ -46,8 +46,8 @@ PeerOrgs:
     #                 Org.Domain, respectively.
     # ---------------------------------------------------------------------------
     # Specs:
-    #   - Hostname: foo # implicitly "foo.health.bgiblockchain.com"
-    #     CommonName: foo27.org5.bgiblockchain.com # overrides Hostname-based FQDN set above
+    #   - Hostname: foo # implicitly "foo.health.businessblockchain.com"
+    #     CommonName: foo27.org5.businessblockchain.com # overrides Hostname-based FQDN set above
     #   - Hostname: bar
     #   - Hostname: baz
     # ---------------------------------------------------------------------------
@@ -77,7 +77,7 @@ PeerOrgs:
   # Org2: See "Health" for full specification
   # ---------------------------------------------------------------------------
   # - Name: Org2
-    # Domain: health.bgiblockchain.com
+    # Domain: health.businessblockchain.com
     # Template:
       # Count: 2
     # Users:

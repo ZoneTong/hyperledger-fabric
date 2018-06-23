@@ -23,7 +23,7 @@ if subcmd == 'up':
     
 for index in range(len(services)):
     if services[index].startswith('p'):
-        services[index] = 'peer'+services[index][1:]+'.health.bgiblockchain.com'
+        services[index] = 'peer'+services[index][1:]+'.health.businessblockchain.com'
 
 s_services = ''
 for ser in services:

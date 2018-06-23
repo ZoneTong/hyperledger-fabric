@@ -1,0 +1,338 @@
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+version: '2'
+
+services:
+
+  orderer0.businessblockchain.com:
+    container_name: orderer0
+    extends:
+      file:   base/docker-compose-base.yaml
+      service: orderer0.businessblockchain.com
+    depends_on:
+      - kafka0.businessblockchain.com
+      - kafka1.businessblockchain.com
+      - kafka2.businessblockchain.com
+      - kafka3.businessblockchain.com
+    #extra_hosts:
+     #- "orderer0.businessblockchain.com:172.16.186.152"
+     #- "peer0.health.businessblockchain.com:172.16.186.152"
+     #- "peer1.health.businessblockchain.com:172.16.186.183"
+     #- "peer2.health.businessblockchain.com:172.16.186.183"
+     #- "peer3.health.businessblockchain.com:172.16.186.152"
+
+  peer0.health.businessblockchain.com:
+    container_name: peer0
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.health.businessblockchain.com
+    depends_on:
+      - orderer0.businessblockchain.com
+    #extra_hosts:
+    # - "orderer0.businessblockchain.com:172.16.186.152"
+    # #- "peer0.health.businessblockchain.com:172.16.186.152"
+    # - "peer1.health.businessblockchain.com:172.16.186.183"
+    # - "peer2.health.businessblockchain.com:172.16.186.152"
+    # - "peer3.health.businessblockchain.com:172.16.186.183"
+    # - "peer4.health.businessblockchain.com:172.16.186.152"
+    # - "peer5.health.businessblockchain.com:172.16.186.183"
+    # - "peer6.health.businessblockchain.com:172.16.186.152"
+    # - "peer7.health.businessblockchain.com:172.16.186.183"
+
+  peer2.health.businessblockchain.com:
+    container_name: peer2
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer2.health.businessblockchain.com
+    #extra_hosts:
+    # - "orderer0.businessblockchain.com:172.16.186.152"
+    # - "peer0.health.businessblockchain.com:172.16.186.152"
+    # - "peer1.health.businessblockchain.com:172.16.186.183"
+    # #- "peer2.health.businessblockchain.com:172.16.186.152"
+    # - "peer3.health.businessblockchain.com:172.16.186.183"
+    # - "peer4.health.businessblockchain.com:172.16.186.152"
+    # - "peer5.health.businessblockchain.com:172.16.186.183"
+    # - "peer6.health.businessblockchain.com:172.16.186.152"
+    # - "peer7.health.businessblockchain.com:172.16.186.183"
+
+  peer4.health.businessblockchain.com:
+    container_name: peer4
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer4.health.businessblockchain.com
+    #extra_hosts:
+    # - "orderer0.businessblockchain.com:172.16.186.152"
+    # - "peer0.health.businessblockchain.com:172.16.186.152"
+    # - "peer1.health.businessblockchain.com:172.16.186.183"
+    # - "peer2.health.businessblockchain.com:172.16.186.152"
+    # - "peer3.health.businessblockchain.com:172.16.186.183"
+    # #- "peer4.health.businessblockchain.com:172.16.186.152"
+    # - "peer5.health.businessblockchain.com:172.16.186.183"
+    # - "peer6.health.businessblockchain.com:172.16.186.152"
+    # - "peer7.health.businessblockchain.com:172.16.186.183"
+
+  peer6.health.businessblockchain.com:
+    container_name: peer6
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer6.health.businessblockchain.com
+    #extra_hosts:
+    # - "orderer0.businessblockchain.com:172.16.186.152"
+    # - "peer0.health.businessblockchain.com:172.16.186.152"
+    # - "peer1.health.businessblockchain.com:172.16.186.183"
+    # - "peer2.health.businessblockchain.com:172.16.186.152"
+    # - "peer3.health.businessblockchain.com:172.16.186.183"
+    # - "peer4.health.businessblockchain.com:172.16.186.152"
+    # - "peer5.health.businessblockchain.com:172.16.186.183"
+    # #- "peer6.health.businessblockchain.com:172.16.186.152"
+    # - "peer7.health.businessblockchain.com:172.16.186.183"
+
+  cli2:
+    container_name: cli2
+    image: hyperledger/fabric-tools
+    tty: true
+    environment:
+      - GOPATH=/opt/gopath
+      - GODEBUG=netdns=go
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_LOGGING_LEVEL=DEBUG
+      - CORE_PEER_ID=cli2
+      - CORE_PEER_ADDRESS=peer2.health.businessblockchain.com:7151
+      - CORE_PEER_LOCALMSPID=HealthMSP
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_BGITLS=true
+      - CORE_PEER_BGICAFILE=/etc/hyperledger/fabric/tls/tlsca/tlsca.businessblockchain.com-cert.pem
+      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/health.businessblockchain.com/peers/peer2.health.businessblockchain.com/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/health.businessblockchain.com/peers/peer2.health.businessblockchain.com/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/health.businessblockchain.com/peers/peer2.health.businessblockchain.com/tls/ca.crt
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/health.businessblockchain.com/users/Admin@health.businessblockchain.com/msp
+      - CORE_PEER_MULTITHCNT=6
+      - CORE_PEER_DEFAULTLISADDRIP=0.0.0.0
+      - CORE_PEER_DEFAULTLISADDRPORT=9000
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: /bin/bash -c './scripts/script_kafka.sh ${CHANNEL_NAME}; sleep $TIMEOUT'
+    volumes:
+        - /var/run/:/host/var/run/
+        - ./examples/chaincode/go/:/opt/gopath/src/github.com/hyperledger/fabric/examples/chaincode/go
+        - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
+        - ./scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
+        - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts
+        #- /bgi/blockchain_data/cli2/pro/:/opt/gopath/src/github.com/hyperledger/fabric/peer
+        - ./crypto-config/ordererOrganizations/businessblockchain.com/tlsca/:/etc/hyperledger/fabric/tls/tlsca
+    depends_on:
+      - orderer0.businessblockchain.com
+      - peer0.health.businessblockchain.com
+      - peer2.health.businessblockchain.com
+      - peer4.health.businessblockchain.com
+      - peer6.health.businessblockchain.com
+    #extra_hosts:
+    # - "orderer0.businessblockchain.com:172.16.186.152"
+    # - "peer0.health.businessblockchain.com:172.16.186.152"
+    # - "peer1.health.businessblockchain.com:172.16.186.183"
+    # - "peer2.health.businessblockchain.com:172.16.186.152"
+    # - "peer3.health.businessblockchain.com:172.16.186.183"
+    # - "peer4.health.businessblockchain.com:172.16.186.152"
+    # - "peer5.health.businessblockchain.com:172.16.186.183"
+    # - "peer6.health.businessblockchain.com:172.16.186.152"
+    # - "peer7.health.businessblockchain.com:172.16.186.183"
+
+
+# ZooKeeper services, at least 3 nodes
+  zookeeper0.businessblockchain.com:
+    extends:
+      file: base/docker-compose-base.yaml
+      service: zookeeper0.businessblockchain.com
+
+  zookeeper1.businessblockchain.com:
+    extends:
+      file: base/docker-compose-base.yaml
+      service: zookeeper1.businessblockchain.com
+
+  zookeeper2.businessblockchain.com:
+    extends:
+      file: base/docker-compose-base.yaml
+      service: zookeeper2.businessblockchain.com
+
+# Kafka services, at least 4 node to tolerant work with 1 node failure
+  kafka0.businessblockchain.com:
+    extends:
+      file: base/docker-compose-base.yaml
+      service: kafka0.businessblockchain.com
+    depends_on:
+      - zookeeper0.businessblockchain.com
+      - zookeeper1.businessblockchain.com
+      - zookeeper2.businessblockchain.com
+
+  kafka1.businessblockchain.com:
+    extends:
+      file: base/docker-compose-base.yaml
+      service: kafka1.businessblockchain.com
+    depends_on:
+      - zookeeper0.businessblockchain.com
+      - zookeeper1.businessblockchain.com
+      - zookeeper2.businessblockchain.com
+
+  kafka2.businessblockchain.com:
+    extends:
+      file: base/docker-compose-base.yaml
+      service: kafka2.businessblockchain.com
+    depends_on:
+      - zookeeper0.businessblockchain.com
+      - zookeeper1.businessblockchain.com
+      - zookeeper2.businessblockchain.com
+
+  kafka3.businessblockchain.com:
+    extends:
+      file: base/docker-compose-base.yaml
+      service: kafka3.businessblockchain.com
+    depends_on:
+      - zookeeper0.businessblockchain.com
+      - zookeeper1.businessblockchain.com
+      - zookeeper2.businessblockchain.com
+
+
+
+  orderer1.businessblockchain.com:
+    container_name: orderer1
+    extends:
+      file:   base/docker-compose-base.yaml
+      service: orderer1.businessblockchain.com
+    depends_on:
+      - kafka0.businessblockchain.com
+      - kafka1.businessblockchain.com
+      - kafka2.businessblockchain.com
+      - kafka3.businessblockchain.com
+
+  peer1.health.businessblockchain.com:
+    container_name: peer1
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer1.health.businessblockchain.com
+    #extra_hosts:
+    # - "orderer0.businessblockchain.com:172.16.186.144"
+    # - "peer0.health.businessblockchain.com:172.16.186.144"
+    # #- "peer1.health.businessblockchain.com:172.16.186.183"
+    # - "peer2.health.businessblockchain.com:172.16.186.144"
+    # - "peer3.health.businessblockchain.com:172.16.186.183"
+    # - "peer4.health.businessblockchain.com:172.16.186.144"
+    # - "peer5.health.businessblockchain.com:172.16.186.183"
+    # - "peer6.health.businessblockchain.com:172.16.186.144"
+    # - "peer7.health.businessblockchain.com:172.16.186.183"
+    # - "peer9.health.businessblockchain.com:172.16.186.183"
+
+  peer3.health.businessblockchain.com:
+    container_name: peer3
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer3.health.businessblockchain.com
+    #extra_hosts:
+    # - "orderer0.businessblockchain.com:172.16.186.144"
+    # - "peer0.health.businessblockchain.com:172.16.186.144"
+    # - "peer1.health.businessblockchain.com:172.16.186.183"
+    # - "peer2.health.businessblockchain.com:172.16.186.144"
+    # #- "peer3.health.businessblockchain.com:172.16.186.183"
+    # - "peer4.health.businessblockchain.com:172.16.186.144"
+    # - "peer5.health.businessblockchain.com:172.16.186.183"
+    # - "peer6.health.businessblockchain.com:172.16.186.144"
+    # - "peer7.health.businessblockchain.com:172.16.186.183"
+
+  peer5.health.businessblockchain.com:
+    container_name: peer5
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer5.health.businessblockchain.com
+    #extra_hosts:
+    # - "orderer0.businessblockchain.com:172.16.186.144"
+    # - "peer0.health.businessblockchain.com:172.16.186.144"
+    # - "peer1.health.businessblockchain.com:172.16.186.183"
+    # - "peer2.health.businessblockchain.com:172.16.186.144"
+    # - "peer3.health.businessblockchain.com:172.16.186.183"
+    # - "peer4.health.businessblockchain.com:172.16.186.144"
+    # #- "peer5.health.businessblockchain.com:172.16.186.183"
+    # - "peer6.health.businessblockchain.com:172.16.186.144"
+    # - "peer7.health.businessblockchain.com:172.16.186.183"
+
+  peer7.health.businessblockchain.com:
+    container_name: peer7
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer7.health.businessblockchain.com
+    #extra_hosts:
+    # - "orderer0.businessblockchain.com:172.16.186.144"
+    # - "peer0.health.businessblockchain.com:172.16.186.144"
+    # - "peer1.health.businessblockchain.com:172.16.186.183"
+    # - "peer2.health.businessblockchain.com:172.16.186.144"
+    # - "peer3.health.businessblockchain.com:172.16.186.183"
+    # - "peer4.health.businessblockchain.com:172.16.186.144"
+    # - "peer5.health.businessblockchain.com:172.16.186.183"
+    # - "peer6.health.businessblockchain.com:172.16.186.144"
+    # #- "peer7.health.businessblockchain.com:172.16.186.183"
+
+  #peer9.health.businessblockchain.com:
+  #  container_name: peer9.health.businessblockchain.com
+  #  extends:
+  #    file:  base/docker-compose-base.yaml
+  #    service: peer9.health.businessblockchain.com
+  #  extra_hosts:
+  #   - "orderer0.businessblockchain.com:172.16.186.144"
+  #   - "peer0.health.businessblockchain.com:172.16.186.144"
+  #   - "peer1.health.businessblockchain.com:172.16.186.183"
+  #   - "peer2.health.businessblockchain.com:172.16.186.144"
+  #   - "peer3.health.businessblockchain.com:172.16.186.183"
+  #   - "peer4.health.businessblockchain.com:172.16.186.144"
+  #   - "peer5.health.businessblockchain.com:172.16.186.183"
+  #   - "peer6.health.businessblockchain.com:172.16.186.144"
+  #   - "peer7.health.businessblockchain.com:172.16.186.183"
+
+  cli7:
+    container_name: cli7
+    image: hyperledger/fabric-tools
+    tty: true
+    environment:
+      - GOPATH=/opt/gopath
+      - GODEBUG=netdns=go
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_LOGGING_LEVEL=DEBUG
+      - CORE_PEER_ID=cli7
+      - CORE_PEER_ADDRESS=peer7.health.businessblockchain.com:7151
+      - CORE_PEER_LOCALMSPID=HealthMSP
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_BGITLS=true
+      - CORE_PEER_BGICAFILE=/etc/hyperledger/fabric/tls/tlsca/tlsca.businessblockchain.com-cert.pem
+      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/health.businessblockchain.com/peers/peer7.health.businessblockchain.com/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/health.businessblockchain.com/peers/peer7.health.businessblockchain.com/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/health.businessblockchain.com/peers/peer7.health.businessblockchain.com/tls/ca.crt
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/health.businessblockchain.com/users/Admin@health.businessblockchain.com/msp
+      - CORE_PEER_MULTITHCNT=6
+      - CORE_PEER_DEFAULTLISADDRIP=0.0.0.0
+      - CORE_PEER_DEFAULTLISADDRPORT=9000
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    #command: /bin/bash -c './scripts/script_kafka1.sh ${CHANNEL_NAME}; sleep $TIMEOUT'
+    volumes:
+        - /var/run/:/host/var/run/
+        - ./examples/chaincode/go/:/opt/gopath/src/github.com/hyperledger/fabric/examples/chaincode/go
+        - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
+        - ./scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
+        - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts
+        - /bgi/blockchain_data/cli7/pro/:/opt/gopath/src/github.com/hyperledger/fabric/peer
+        - ./crypto-config/ordererOrganizations/businessblockchain.com/tlsca/:/etc/hyperledger/fabric/tls/tlsca
+    depends_on:
+      - orderer1.businessblockchain.com
+      - peer1.health.businessblockchain.com
+      - peer3.health.businessblockchain.com
+      - peer5.health.businessblockchain.com
+      - peer7.health.businessblockchain.com
+    #extra_hosts:
+    # - "orderer0.businessblockchain.com:172.16.186.144"
+    # - "peer0.health.businessblockchain.com:172.16.186.144"
+    # - "peer1.health.businessblockchain.com:172.16.186.183"
+    # - "peer2.health.businessblockchain.com:172.16.186.144"
+    # - "peer3.health.businessblockchain.com:172.16.186.183"
+    # - "peer4.health.businessblockchain.com:172.16.186.144"
+    # - "peer5.health.businessblockchain.com:172.16.186.183"
+    # - "peer6.health.businessblockchain.com:172.16.186.144"
+    # - "peer7.health.businessblockchain.com:172.16.186.183"
+    # - "peer9.health.businessblockchain.com:172.16.186.183"

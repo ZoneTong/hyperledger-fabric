@@ -17,7 +17,7 @@ services:
       - CORE_LOGGING_LEVEL=DEBUG
       - CORE_PEER_TLS_ENABLED=true
       - CORE_PEER_BGITLS=true
-      - CORE_PEER_BGICAFILE=/etc/hyperledger/fabric/tls/tlsca/tlsca.bgiblockchain.com-cert.pem
+      - CORE_PEER_BGICAFILE=/etc/hyperledger/fabric/tls/tlsca/tlsca.businessblockchain.com-cert.pem
       - CORE_PEER_GOSSIP_USELEADERELECTION=true
       - CORE_PEER_GOSSIP_ORGLEADER=false
       - CORE_PEER_PROFILE_ENABLED=true
@@ -31,7 +31,7 @@ services:
       - CORE_PEER_GRPCKEYFILE=/etc/hyperledger/fabric/tls/bgitls/grpcserver.key
     volumes:
       - /opt/gopath/src/github.com/hyperledger/fabric/bgi_client_health/backup/grpctls:/etc/hyperledger/fabric/tls/bgitls
-      - ../crypto-config/ordererOrganizations/bgiblockchain.com/tlsca/:/etc/hyperledger/fabric/tls/tlsca
+      - ../crypto-config/ordererOrganizations/businessblockchain.com/tlsca/:/etc/hyperledger/fabric/tls/tlsca
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     command: /bin/bash -c 'peer node start'
 
