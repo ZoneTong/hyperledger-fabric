@@ -1,0 +1,358 @@
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+version: '2'
+
+services:
+
+  orderer0.bgiblockchain.com:
+    container_name: orderer0.bgiblockchain.com
+    extends:
+      file: peer-base.yaml
+      service: orderer-base
+    volumes:
+      - ../crypto-config/ordererOrganizations/bgiblockchain.com/orderers/orderer0.bgiblockchain.com/msp:/var/hyperledger/orderer/msp
+      - ../crypto-config/ordererOrganizations/bgiblockchain.com/orderers/orderer0.bgiblockchain.com/tls/:/var/hyperledger/orderer/tls
+      #- /bgi/blockchain_data/orderer/pro/:/var/hyperledger/production/
+    ports:
+      - 7050:7050
+
+  peer0.health.bgiblockchain.com:
+    container_name: peer0.health.bgiblockchain.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.health.bgiblockchain.com
+      - CORE_PEER_ADDRESS=peer0.health.bgiblockchain.com:7051
+      - CORE_PEER_CHAINCODELISTENADDRESS=peer0.health.bgiblockchain.com:7052
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.health.bgiblockchain.com:7051
+      - CORE_PEER_LOCALMSPID=HealthMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/health.bgiblockchain.com/peers/peer0.health.bgiblockchain.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/health.bgiblockchain.com/peers/peer0.health.bgiblockchain.com/tls:/etc/hyperledger/fabric/tls
+        #- /bgi/blockchain_data/peer0/pro/:/var/hyperledger/production/
+        #- /bgi/blockchain_data/peer0/logs/:/opt/gopath/src/github.com/hyperledger/fabric/peer
+    ports:
+      - 7051:7051
+      - 7052:7052
+      - 7053:7053
+      - 8006:9000
+
+  peer2.health.bgiblockchain.com:
+    container_name: peer2.health.bgiblockchain.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer2.health.bgiblockchain.com
+      - CORE_PEER_ADDRESS=peer2.health.bgiblockchain.com:7151
+      - CORE_PEER_LISTENADDRESS=peer2.health.bgiblockchain.com:7151
+      - CORE_PEER_CHAINCODELISTENADDRESS=peer2.health.bgiblockchain.com:7152
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer2.health.bgiblockchain.com:7151
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.health.bgiblockchain.com:7051
+      - CORE_PEER_LOCALMSPID=HealthMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/health.bgiblockchain.com/peers/peer2.health.bgiblockchain.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/health.bgiblockchain.com/peers/peer2.health.bgiblockchain.com/tls:/etc/hyperledger/fabric/tls
+        #- /bgi/blockchain_data/peer2/pro/:/var/hyperledger/production/
+        #- /bgi/blockchain_data/peer2/logs/:/opt/gopath/src/github.com/hyperledger/fabric/peer
+    ports:
+      - 7151:7151
+      - 7152:7152
+      - 7153:7153
+      - 8016:9000
+
+  peer4.health.bgiblockchain.com:
+    container_name: peer4.health.bgiblockchain.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer4.health.bgiblockchain.com
+      - CORE_PEER_ADDRESS=peer4.health.bgiblockchain.com:7251
+      - CORE_PEER_LISTENADDRESS=peer4.health.bgiblockchain.com:7251
+      - CORE_PEER_CHAINCODELISTENADDRESS=peer4.health.bgiblockchain.com:7252
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer4.health.bgiblockchain.com:7251
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.health.bgiblockchain.com:7051
+      - CORE_PEER_LOCALMSPID=HealthMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/health.bgiblockchain.com/peers/peer4.health.bgiblockchain.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/health.bgiblockchain.com/peers/peer4.health.bgiblockchain.com/tls:/etc/hyperledger/fabric/tls
+        #- /bgi/blockchain_data/peer4/pro/:/var/hyperledger/production/
+        #- /bgi/blockchain_data/peer4/logs/:/opt/gopath/src/github.com/hyperledger/fabric/peer
+    ports:
+      - 7251:7251
+      - 7252:7252
+      - 7253:7253
+      - 8026:9000
+
+  peer6.health.bgiblockchain.com:
+    container_name: peer6.health.bgiblockchain.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer6.health.bgiblockchain.com
+      - CORE_PEER_ADDRESS=peer6.health.bgiblockchain.com:7351
+      - CORE_PEER_LISTENADDRESS=peer6.health.bgiblockchain.com:7351
+      - CORE_PEER_CHAINCODELISTENADDRESS=peer6.health.bgiblockchain.com:7352
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer6.health.bgiblockchain.com:7351
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.health.bgiblockchain.com:7051
+      - CORE_PEER_LOCALMSPID=HealthMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/health.bgiblockchain.com/peers/peer6.health.bgiblockchain.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/health.bgiblockchain.com/peers/peer6.health.bgiblockchain.com/tls:/etc/hyperledger/fabric/tls
+        #- /bgi/blockchain_data/peer6/pro/:/var/hyperledger/production/
+        #- /bgi/blockchain_data/peer6/logs/:/opt/gopath/src/github.com/hyperledger/fabric/peer
+    ports:
+      - 7351:7351
+      - 7352:7352
+      - 7353:7353
+      - 8036:9000
+
+  peer9.health.bgiblockchain.com:
+    container_name: peer9.health.bgiblockchain.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer9.health.bgiblockchain.com
+      - CORE_PEER_ADDRESS=peer9.health.bgiblockchain.com:7451
+      - CORE_PEER_LISTENADDRESS=peer9.health.bgiblockchain.com:7451
+      - CORE_PEER_CHAINCODELISTENADDRESS=peer9.health.bgiblockchain.com:7452
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer9.health.bgiblockchain.com:7451
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.health.bgiblockchain.com:7051
+      - CORE_PEER_LOCALMSPID=HealthMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/health.bgiblockchain.com/peers/peer9.health.bgiblockchain.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/health.bgiblockchain.com/peers/peer9.health.bgiblockchain.com/tls:/etc/hyperledger/fabric/tls
+        - /bgi/blockchain_data/peer9/pro/:/var/hyperledger/production/
+        - /bgi/blockchain_data/peer9/logs/:/opt/gopath/src/github.com/hyperledger/fabric/peer
+    ports:
+      - 7451:7451
+      - 7452:7452
+      - 7453:7453
+      - 8046:9000
+
+# ZooKeeper services, at least 3 nodes
+  zookeeper0.bgiblockchain.com:
+    extends:
+      file: kafka-base.yaml
+      service: zookeeper-base
+    container_name: zookeeper0
+    #hostname: zookeeper0.bgiblockchain.com
+    environment:
+      - ZOO_MY_ID=1
+      - ZOO_SERVERS=server.1=zookeeper0.bgiblockchain.com:2888:3888 server.2=zookeeper1.bgiblockchain.com:2888:3888 server.3=zookeeper2.bgiblockchain.com:2888:3888
+
+  zookeeper1.bgiblockchain.com:
+    extends:
+      file: kafka-base.yaml
+      service: zookeeper-base
+    container_name: zookeeper1
+    #hostname: zookeeper1.bgiblockchain.com
+    environment:
+      - ZOO_MY_ID=2
+      - ZOO_SERVERS=server.1=zookeeper0.bgiblockchain.com:2888:3888 server.2=zookeeper1.bgiblockchain.com:2888:3888 server.3=zookeeper2.bgiblockchain.com:2888:3888
+
+  zookeeper2.bgiblockchain.com:
+    extends:
+      file: kafka-base.yaml
+      service: zookeeper-base
+    container_name: zookeeper2
+    #hostname: zookeeper2.bgiblockchain.com
+    environment:
+      - ZOO_MY_ID=3
+      - ZOO_SERVERS=server.1=zookeeper0.bgiblockchain.com:2888:3888 server.2=zookeeper1.bgiblockchain.com:2888:3888 server.3=zookeeper2.bgiblockchain.com:2888:3888
+
+# Kafka services, at least 4 node to tolerant work with 1 node failure
+  kafka0.bgiblockchain.com:
+    extends:
+      file: kafka-base.yaml
+      service: kafka-base
+    container_name: kafka0
+    #hostname: kafka0.bgiblockchain.com
+    environment:
+      - KAFKA_BROKER_ID=0
+      - KAFKA_MIN_INSYNC_REPLICAS=2
+      - KAFKA_DEFAULT_REPLICATION_FACTOR=3
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper0.bgiblockchain.com:2181,zookeeper1.bgiblockchain.com:2181,zookeeper2.bgiblockchain.com:2181
+
+  kafka1.bgiblockchain.com:
+    extends:
+      file: kafka-base.yaml
+      service: kafka-base
+    container_name: kafka1
+    #hostname: kafka1.bgiblockchain.com
+    environment:
+      - KAFKA_BROKER_ID=1
+      - KAFKA_DEFAULT_REPLICATION_FACTOR=3
+      - KAFKA_MIN_INSYNC_REPLICAS=2
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper0.bgiblockchain.com:2181,zookeeper1.bgiblockchain.com:2181,zookeeper2.bgiblockchain.com:2181
+
+  kafka2.bgiblockchain.com:
+    extends:
+      file: kafka-base.yaml
+      service: kafka-base
+    container_name: kafka2
+    #hostname: kafka2.bgiblockchain.com
+    environment:
+      - KAFKA_BROKER_ID=2
+      - KAFKA_DEFAULT_REPLICATION_FACTOR=3
+      - KAFKA_MIN_INSYNC_REPLICAS=2
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper0.bgiblockchain.com:2181,zookeeper1.bgiblockchain.com:2181,zookeeper2.bgiblockchain.com:2181
+
+  kafka3.bgiblockchain.com:
+    extends:
+      file: kafka-base.yaml
+      service: kafka-base
+    container_name: kafka3
+    #hostname: kafka3.bgiblockchain.com
+    environment:
+      - KAFKA_BROKER_ID=3
+      - KAFKA_DEFAULT_REPLICATION_FACTOR=3
+      - KAFKA_MIN_INSYNC_REPLICAS=2
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper0.bgiblockchain.com:2181,zookeeper1.bgiblockchain.com:2181,zookeeper2.bgiblockchain.com:2181
+
+
+# orderer1 machine
+  orderer1.bgiblockchain.com:
+    container_name: orderer1.bgiblockchain.com
+    extends:
+      file: peer-base.yaml
+      service: orderer-base
+    volumes:
+      - ../crypto-config/ordererOrganizations/bgiblockchain.com/orderers/orderer1.bgiblockchain.com/msp:/var/hyperledger/orderer/msp
+      - ../crypto-config/ordererOrganizations/bgiblockchain.com/orderers/orderer1.bgiblockchain.com/tls/:/var/hyperledger/orderer/tls
+      #- /bgi/blockchain_data/orderer/pro/:/var/hyperledger/production/
+    #ports:
+      #- 7050:7050
+    expose:
+      - '7050'
+
+  peer1.health.bgiblockchain.com:
+    container_name: peer1.health.bgiblockchain.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer1.health.bgiblockchain.com
+      - CORE_PEER_ADDRESS=peer1.health.bgiblockchain.com:7051
+      - CORE_PEER_CHAINCODELISTENADDRESS=peer1.health.bgiblockchain.com:7052
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.health.bgiblockchain.com:7051
+      #- CORE_PEER_GOSSIP_BOOTSTRAP=peer0.health.bgiblockchain.com:7051
+      - CORE_PEER_LOCALMSPID=HealthMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/health.bgiblockchain.com/peers/peer1.health.bgiblockchain.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/health.bgiblockchain.com/peers/peer1.health.bgiblockchain.com/tls:/etc/hyperledger/fabric/tls
+        #- /bgi/blockchain_data/peer1/pro/:/var/hyperledger/production/
+        #- /bgi/blockchain_data/peer1/logs/:/opt/gopath/src/github.com/hyperledger/fabric/peer
+    #ports:
+    #  - 7051:7051
+    #  - 7052:7052
+    #  - 7053:7053
+    #  - 8006:9000
+    expose:
+      - '7051'
+      - '7052'
+      - '7053'
+      - '9000'
+
+  peer3.health.bgiblockchain.com:
+    container_name: peer3.health.bgiblockchain.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer3.health.bgiblockchain.com
+      - CORE_PEER_ADDRESS=peer3.health.bgiblockchain.com:7151
+      - CORE_PEER_LISTENADDRESS=peer3.health.bgiblockchain.com:7151
+      - CORE_PEER_CHAINCODELISTENADDRESS=peer3.health.bgiblockchain.com:7152
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer3.health.bgiblockchain.com:7151
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.health.bgiblockchain.com:7051
+      - CORE_PEER_LOCALMSPID=HealthMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/health.bgiblockchain.com/peers/peer3.health.bgiblockchain.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/health.bgiblockchain.com/peers/peer3.health.bgiblockchain.com/tls:/etc/hyperledger/fabric/tls
+        #- /bgi/blockchain_data/peer3/pro/:/var/hyperledger/production/
+        #- /bgi/blockchain_data/peer3/logs/:/opt/gopath/src/github.com/hyperledger/fabric/peer
+    #ports:
+    #  - 7151:7151
+    #  - 7152:7152
+    #  - 7153:7153
+    #  - 8016:9000
+    expose:
+      - '7151'
+      - '7152'
+      - '7153'
+      - '9000'
+
+  peer5.health.bgiblockchain.com:
+    container_name: peer5.health.bgiblockchain.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer5.health.bgiblockchain.com
+      - CORE_PEER_ADDRESS=peer5.health.bgiblockchain.com:7251
+      - CORE_PEER_LISTENADDRESS=peer5.health.bgiblockchain.com:7251
+      - CORE_PEER_CHAINCODELISTENADDRESS=peer5.health.bgiblockchain.com:7252
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer5.health.bgiblockchain.com:7251
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.health.bgiblockchain.com:7051
+      - CORE_PEER_LOCALMSPID=HealthMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/health.bgiblockchain.com/peers/peer5.health.bgiblockchain.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/health.bgiblockchain.com/peers/peer5.health.bgiblockchain.com/tls:/etc/hyperledger/fabric/tls
+        #- /bgi/blockchain_data/peer5/pro/:/var/hyperledger/production/
+        #- /bgi/blockchain_data/peer5/logs/:/opt/gopath/src/github.com/hyperledger/fabric/peer
+    #ports:
+    #  - 7251:7251
+    #  - 7252:7252
+    #  - 7253:7253
+    #  - 8026:9000
+    expose:
+      - '7251'
+      - '7252'
+      - '7253'
+      - '9000'
+
+  peer7.health.bgiblockchain.com:
+    container_name: peer7.health.bgiblockchain.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer7.health.bgiblockchain.com
+      - CORE_PEER_ADDRESS=peer7.health.bgiblockchain.com:7351
+      - CORE_PEER_LISTENADDRESS=peer7.health.bgiblockchain.com:7351
+      - CORE_PEER_CHAINCODELISTENADDRESS=peer7.health.bgiblockchain.com:7352
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer7.health.bgiblockchain.com:7351
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.health.bgiblockchain.com:7051
+      - CORE_PEER_LOCALMSPID=HealthMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/health.bgiblockchain.com/peers/peer7.health.bgiblockchain.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/health.bgiblockchain.com/peers/peer7.health.bgiblockchain.com/tls:/etc/hyperledger/fabric/tls
+        #- /bgi/blockchain_data/peer7/pro/:/var/hyperledger/production/
+        #- /bgi/blockchain_data/peer7/logs/:/opt/gopath/src/github.com/hyperledger/fabric/peer
+    #ports:
+    #  - 7351:7351
+    #  - 7352:7352
+    #  - 7353:7353
+    #  - 8036:9000
+    expose:
+      - '7351'
+      - '7352'
+      - '7353'
+      - '9000'

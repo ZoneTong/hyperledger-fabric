@@ -1,0 +1,300 @@
+###==================###
+###==================###
+ip:10.0.2.15 20180622151928, boot fabric start
+peer starting
+.IOError: [Errno 2] No such file or directory: u'./docker-compose-peer.yaml'
+
+*** FATAL CONFIG FILE ERROR ***
+Reading the configuration file, at line 165
+>>> 'logfile "/bgi/redis1/redis.log"'
+Can't open the log file: No such file or directory
+bgi_client_health starting
+>>>statics
+<<<statics
+>>>bgi client stop
+pre program is running,start to kill it,pid:
+kill: usage: kill [-s sigspec | -n signum | -sigspec] pid | jobspec ... or kill -l [sigspec]
+<<<bgi client stop
+###==================###
+###==================###
+ip:10.0.2.15 20180622152001, boot fabric start
+peer starting
+.IOError: [Errno 2] No such file or directory: u'./docker-compose-peer.yaml'
+
+*** FATAL CONFIG FILE ERROR ***
+Reading the configuration file, at line 165
+>>> 'logfile "/bgi/redis1/redis.log"'
+Can't open the log file: No such file or directory
+bgi_client_health starting
+>>>statics
+<<<statics
+>>>bgi client stop
+pre program is running,start to kill it,pid:
+kill: usage: kill [-s sigspec | -n signum | -sigspec] pid | jobspec ... or kill -l [sigspec]
+<<<bgi client stop
+20180622_151943
+ip:10.0.2.15,ready to start client
+
+bgilifechain starting
+2018-06-22 15:20:19.733 CST [client] operateCMD -> INFO 001[0m debug= false ,msgDataCnt= 0
+2018-06-22 15:20:19.733 CST [client] operateCMD -> INFO 002[0m params details:
+0 : ./bc
+1 : -C
+2 : bgilifechain
+3 : -o
+4 : 172.16.186.152:7050
+5 : -sar
+6 : localhost.bgi_bc.com:8006
+7 : -fn
+8 : getmsg
+9 : -n
+10 : mycc
+11 : -p1
+12 : zht_key
+input param: n = mycc
+input param: v = 1.0
+input param: m = query
+input param: p = a
+input param: key = ../backup/grpctls/grpcclient.crt
+input param: C = bgilifechain
+input param: o = 172.16.186.152:7050
+2018-06-22 15:20:19.750 CST [client] getGrpcClient -> INFO 003[0m getGrpcClient localhost.bgi_bc.com:8006 ../backup/grpctls/grpcclient.crt
+2018-06-22 15:20:19.751 CST [client] operateCMD -> INFO 004[0m grpc clientRead  init success ...
+2018-06-22 15:20:19.751 CST [client] getGrpcClient -> INFO 005[0m getGrpcClient 192.168.31.103:8006 ../backup/grpctls/grpcclient.crt
+2018-06-22 15:20:19.751 CST [client] operateCMD -> INFO 006[0m grpc clientWrite  init success ...
+2018-06-22 15:20:19.752 CST [client] operateCMD -> INFO 007[0m ..............begin to get msg..............
+2018-06-22 15:20:19.752 CST [client] clientOptGetMsg -> INFO 008[0m clientGetMsg start,key:%!(EXTRA string=zht_key)
+clientOptGetMsg, begin to call grpc input cid= bgilifechain ccn= mycc key= zht_key
+2018-06-22 15:20:19.755 CST [client] clientOptGetMsg -> INFO 009[0m clientOptGetMsg result, rpc error: code = Unavailable desc = grpc: the connection is unavailable
+2018-06-22 15:20:19.755 CST [client] operateCMD -> INFO 00a[0m ..............get msg end..............
+2018-06-22 15:20:19.755 CST [client] operateCMD -> INFO 00b[0m ..............client cmd  over................
+2018-06-22 15:20:19.801 CST [client] operateCMD -> INFO 001[0m debug= false ,msgDataCnt= 0
+2018-06-22 15:20:19.801 CST [client] operateCMD -> INFO 002[0m params details:
+0 : ./bc
+1 : -C
+2 : bgilifechain
+3 : -o
+4 : 172.16.186.152:7050
+5 : -sar
+6 : localhost.bgi_bc.com:8016
+7 : -fn
+8 : getmsg
+9 : -n
+10 : mycc
+11 : -p1
+12 : zht_key
+input param: C = bgilifechain
+input param: o = 172.16.186.152:7050
+input param: n = mycc
+input param: v = 1.0
+input param: m = query
+input param: p = a
+input param: key = ../backup/grpctls/grpcclient.crt
+2018-06-22 15:20:19.805 CST [client] getGrpcClient -> INFO 003[0m getGrpcClient localhost.bgi_bc.com:8016 ../backup/grpctls/grpcclient.crt
+2018-06-22 15:20:19.806 CST [client] operateCMD -> INFO 004[0m grpc clientRead  init success ...
+2018-06-22 15:20:19.807 CST [client] getGrpcClient -> INFO 005[0m getGrpcClient 192.168.31.103:8006 ../backup/grpctls/grpcclient.crt
+2018-06-22 15:20:19.808 CST [client] operateCMD -> INFO 006[0m grpc clientWrite  init success ...
+2018-06-22 15:20:19.808 CST [client] operateCMD -> INFO 007[0m ..............begin to get msg..............
+2018-06-22 15:20:19.808 CST [client] clientOptGetMsg -> INFO 008[0m clientGetMsg start,key:%!(EXTRA string=zht_key)
+clientOptGetMsg, begin to call grpc input cid= bgilifechain ccn= mycc key= zht_key
+2018-06-22 15:20:19.811 CST [client] clientOptGetMsg -> INFO 009[0m clientOptGetMsg result, rpc error: code = Unavailable desc = grpc: the connection is unavailable
+2018-06-22 15:20:19.811 CST [client] operateCMD -> INFO 00a[0m ..............get msg end..............
+2018-06-22 15:20:19.812 CST [client] operateCMD -> INFO 00b[0m ..............client cmd  over................
+2018-06-22 15:20:19.876 CST [client] operateCMD -> INFO 001[0m debug= false ,msgDataCnt= 0
+2018-06-22 15:20:19.876 CST [client] operateCMD -> INFO 002[0m params details:
+0 : ./bc
+1 : -C
+2 : bgilifechain
+3 : -o
+4 : 172.16.186.152:7050
+5 : -sar
+6 : localhost.bgi_bc.com:8026
+7 : -fn
+8 : getmsg
+9 : -n
+10 : mycc
+11 : -p1
+12 : zht_key
+input param: o = 172.16.186.152:7050
+input param: n = mycc
+input param: v = 1.0
+input param: m = query
+input param: p = a
+input param: key = ../backup/grpctls/grpcclient.crt
+input param: C = bgilifechain
+2018-06-22 15:20:19.879 CST [client] getGrpcClient -> INFO 003[0m getGrpcClient localhost.bgi_bc.com:8026 ../backup/grpctls/grpcclient.crt
+2018-06-22 15:20:19.880 CST [client] operateCMD -> INFO 004[0m grpc clientRead  init success ...
+2018-06-22 15:20:19.881 CST [client] getGrpcClient -> INFO 005[0m getGrpcClient 192.168.31.103:8006 ../backup/grpctls/grpcclient.crt
+2018-06-22 15:20:19.881 CST [client] operateCMD -> INFO 006[0m grpc clientWrite  init success ...
+2018-06-22 15:20:19.881 CST [client] operateCMD -> INFO 007[0m ..............begin to get msg..............
+2018-06-22 15:20:19.881 CST [client] clientOptGetMsg -> INFO 008[0m clientGetMsg start,key:%!(EXTRA string=zht_key)
+clientOptGetMsg, begin to call grpc input cid= bgilifechain ccn= mycc key= zht_key
+2018-06-22 15:20:19.884 CST [client] clientOptGetMsg -> INFO 009[0m clientOptGetMsg result, rpc error: code = Unavailable desc = grpc: the connection is unavailable
+2018-06-22 15:20:19.884 CST [client] operateCMD -> INFO 00a[0m ..............get msg end..............
+2018-06-22 15:20:19.884 CST [client] operateCMD -> INFO 00b[0m ..............client cmd  over................
+2018-06-22 15:20:19.925 CST [client] operateCMD -> INFO 001[0m debug= false ,msgDataCnt= 0
+2018-06-22 15:20:19.925 CST [client] operateCMD -> INFO 002[0m params details:
+0 : ./bc
+1 : -C
+2 : bgilifechain
+3 : -o
+4 : 172.16.186.152:7050
+5 : -sar
+6 : localhost.bgi_bc.com:8036
+7 : -fn
+8 : getmsg
+9 : -n
+10 : mycc
+11 : -p1
+12 : zht_key
+input param: n = mycc
+input param: v = 1.0
+input param: m = query
+input param: p = a
+input param: key = ../backup/grpctls/grpcclient.crt
+input param: C = bgilifechain
+input param: o = 172.16.186.152:7050
+2018-06-22 15:20:19.929 CST [client] getGrpcClient -> INFO 003[0m getGrpcClient localhost.bgi_bc.com:8036 ../backup/grpctls/grpcclient.crt
+2018-06-22 15:20:19.930 CST [client] operateCMD -> INFO 004[0m grpc clientRead  init success ...
+2018-06-22 15:20:19.930 CST [client] getGrpcClient -> INFO 005[0m getGrpcClient 192.168.31.103:8006 ../backup/grpctls/grpcclient.crt
+2018-06-22 15:20:19.930 CST [client] operateCMD -> INFO 006[0m grpc clientWrite  init success ...
+2018-06-22 15:20:19.931 CST [client] operateCMD -> INFO 007[0m ..............begin to get msg..............
+2018-06-22 15:20:19.931 CST [client] clientOptGetMsg -> INFO 008[0m clientGetMsg start,key:%!(EXTRA string=zht_key)
+clientOptGetMsg, begin to call grpc input cid= bgilifechain ccn= mycc key= zht_key
+2018-06-22 15:20:19.934 CST [client] clientOptGetMsg -> INFO 009[0m clientOptGetMsg result, rpc error: code = Unavailable desc = grpc: the connection is unavailable
+2018-06-22 15:20:19.934 CST [client] operateCMD -> INFO 00a[0m ..............get msg end..............
+2018-06-22 15:20:19.934 CST [client] operateCMD -> INFO 00b[0m ..............client cmd  over................
+boot fabric end
+###==================###
+###==================###
+2018-06-22 15:20:25.754 CST [client] operateCMD -> INFO 001[0m debug= false ,msgDataCnt= 0
+2018-06-22 15:20:25.754 CST [client] operateCMD -> INFO 002[0m params details:
+0 : ./bc
+1 : -C
+2 : bgilifechain
+3 : -o
+4 : 172.16.186.152:7050
+5 : -sar
+6 : localhost.bgi_bc.com:8006
+7 : -fn
+8 : getmsg
+9 : -n
+10 : mycc
+11 : -p1
+12 : zht_key
+input param: key = ../backup/grpctls/grpcclient.crt
+input param: C = bgilifechain
+input param: o = 172.16.186.152:7050
+input param: n = mycc
+input param: v = 1.0
+input param: m = query
+input param: p = a
+2018-06-22 15:20:25.757 CST [client] getGrpcClient -> INFO 003[0m getGrpcClient localhost.bgi_bc.com:8006 ../backup/grpctls/grpcclient.crt
+2018-06-22 15:20:25.758 CST [client] operateCMD -> INFO 004[0m grpc clientRead  init success ...
+2018-06-22 15:20:25.759 CST [client] getGrpcClient -> INFO 005[0m getGrpcClient 192.168.31.103:8006 ../backup/grpctls/grpcclient.crt
+2018-06-22 15:20:25.759 CST [client] operateCMD -> INFO 006[0m grpc clientWrite  init success ...
+2018-06-22 15:20:25.759 CST [client] operateCMD -> INFO 007[0m ..............begin to get msg..............
+2018-06-22 15:20:25.759 CST [client] clientOptGetMsg -> INFO 008[0m clientGetMsg start,key:%!(EXTRA string=zht_key)
+clientOptGetMsg, begin to call grpc input cid= bgilifechain ccn= mycc key= zht_key
+2018-06-22 15:20:25.777 CST [client] clientOptGetMsg -> INFO 009[0m clientOptGetMsg result, rpc error: code = Unavailable desc = grpc: the connection is unavailable
+2018-06-22 15:20:25.777 CST [client] operateCMD -> INFO 00a[0m ..............get msg end..............
+2018-06-22 15:20:25.777 CST [client] operateCMD -> INFO 00b[0m ..............client cmd  over................
+2018-06-22 15:20:25.827 CST [client] operateCMD -> INFO 001[0m debug= false ,msgDataCnt= 0
+2018-06-22 15:20:25.828 CST [client] operateCMD -> INFO 002[0m params details:
+0 : ./bc
+1 : -C
+2 : bgilifechain
+3 : -o
+4 : 172.16.186.152:7050
+5 : -sar
+6 : localhost.bgi_bc.com:8016
+7 : -fn
+8 : getmsg
+9 : -n
+10 : mycc
+11 : -p1
+12 : zht_key
+input param: key = ../backup/grpctls/grpcclient.crt
+input param: C = bgilifechain
+input param: o = 172.16.186.152:7050
+input param: n = mycc
+input param: v = 1.0
+input param: m = query
+input param: p = a
+2018-06-22 15:20:25.830 CST [client] getGrpcClient -> INFO 003[0m getGrpcClient localhost.bgi_bc.com:8016 ../backup/grpctls/grpcclient.crt
+2018-06-22 15:20:25.831 CST [client] operateCMD -> INFO 004[0m grpc clientRead  init success ...
+2018-06-22 15:20:25.832 CST [client] getGrpcClient -> INFO 005[0m getGrpcClient 192.168.31.103:8006 ../backup/grpctls/grpcclient.crt
+2018-06-22 15:20:25.832 CST [client] operateCMD -> INFO 006[0m grpc clientWrite  init success ...
+2018-06-22 15:20:25.832 CST [client] operateCMD -> INFO 007[0m ..............begin to get msg..............
+2018-06-22 15:20:25.832 CST [client] clientOptGetMsg -> INFO 008[0m clientGetMsg start,key:%!(EXTRA string=zht_key)
+clientOptGetMsg, begin to call grpc input cid= bgilifechain ccn= mycc key= zht_key
+2018-06-22 15:20:25.834 CST [client] clientOptGetMsg -> INFO 009[0m clientOptGetMsg result, rpc error: code = Unavailable desc = grpc: the connection is unavailable
+2018-06-22 15:20:25.834 CST [client] operateCMD -> INFO 00a[0m ..............get msg end..............
+2018-06-22 15:20:25.835 CST [client] operateCMD -> INFO 00b[0m ..............client cmd  over................
+2018-06-22 15:20:25.879 CST [client] operateCMD -> INFO 001[0m debug= false ,msgDataCnt= 0
+2018-06-22 15:20:25.880 CST [client] operateCMD -> INFO 002[0m params details:
+0 : ./bc
+1 : -C
+2 : bgilifechain
+3 : -o
+4 : 172.16.186.152:7050
+5 : -sar
+6 : localhost.bgi_bc.com:8026
+7 : -fn
+8 : getmsg
+9 : -n
+10 : mycc
+11 : -p1
+12 : zht_key
+input param: m = query
+input param: p = a
+input param: key = ../backup/grpctls/grpcclient.crt
+input param: C = bgilifechain
+input param: o = 172.16.186.152:7050
+input param: n = mycc
+input param: v = 1.0
+2018-06-22 15:20:25.883 CST [client] getGrpcClient -> INFO 003[0m getGrpcClient localhost.bgi_bc.com:8026 ../backup/grpctls/grpcclient.crt
+2018-06-22 15:20:25.884 CST [client] operateCMD -> INFO 004[0m grpc clientRead  init success ...
+2018-06-22 15:20:25.885 CST [client] getGrpcClient -> INFO 005[0m getGrpcClient 192.168.31.103:8006 ../backup/grpctls/grpcclient.crt
+2018-06-22 15:20:25.885 CST [client] operateCMD -> INFO 006[0m grpc clientWrite  init success ...
+2018-06-22 15:20:25.885 CST [client] operateCMD -> INFO 007[0m ..............begin to get msg..............
+2018-06-22 15:20:25.885 CST [client] clientOptGetMsg -> INFO 008[0m clientGetMsg start,key:%!(EXTRA string=zht_key)
+clientOptGetMsg, begin to call grpc input cid= bgilifechain ccn= mycc key= zht_key
+2018-06-22 15:20:25.888 CST [client] clientOptGetMsg -> INFO 009[0m clientOptGetMsg result, rpc error: code = Unavailable desc = grpc: the connection is unavailable
+2018-06-22 15:20:25.888 CST [client] operateCMD -> INFO 00a[0m ..............get msg end..............
+2018-06-22 15:20:25.888 CST [client] operateCMD -> INFO 00b[0m ..............client cmd  over................
+2018-06-22 15:20:25.933 CST [client] operateCMD -> INFO 001[0m debug= false ,msgDataCnt= 0
+2018-06-22 15:20:25.933 CST [client] operateCMD -> INFO 002[0m params details:
+0 : ./bc
+1 : -C
+2 : bgilifechain
+3 : -o
+4 : 172.16.186.152:7050
+5 : -sar
+6 : localhost.bgi_bc.com:8036
+7 : -fn
+8 : getmsg
+9 : -n
+10 : mycc
+11 : -p1
+12 : zht_key
+input param: v = 1.0
+input param: m = query
+input param: p = a
+input param: key = ../backup/grpctls/grpcclient.crt
+input param: C = bgilifechain
+input param: o = 172.16.186.152:7050
+input param: n = mycc
+2018-06-22 15:20:25.936 CST [client] getGrpcClient -> INFO 003[0m getGrpcClient localhost.bgi_bc.com:8036 ../backup/grpctls/grpcclient.crt
+2018-06-22 15:20:25.937 CST [client] operateCMD -> INFO 004[0m grpc clientRead  init success ...
+2018-06-22 15:20:25.937 CST [client] getGrpcClient -> INFO 005[0m getGrpcClient 192.168.31.103:8006 ../backup/grpctls/grpcclient.crt
+2018-06-22 15:20:25.937 CST [client] operateCMD -> INFO 006[0m grpc clientWrite  init success ...
+2018-06-22 15:20:25.937 CST [client] operateCMD -> INFO 007[0m ..............begin to get msg..............
+2018-06-22 15:20:25.938 CST [client] clientOptGetMsg -> INFO 008[0m clientGetMsg start,key:%!(EXTRA string=zht_key)
+clientOptGetMsg, begin to call grpc input cid= bgilifechain ccn= mycc key= zht_key
+2018-06-22 15:20:25.941 CST [client] clientOptGetMsg -> INFO 009[0m clientOptGetMsg result, rpc error: code = Unavailable desc = grpc: the connection is unavailable
+2018-06-22 15:20:25.941 CST [client] operateCMD -> INFO 00a[0m ..............get msg end..............
+2018-06-22 15:20:25.941 CST [client] operateCMD -> INFO 00b[0m ..............client cmd  over................
+boot fabric end
+###==================###
+###==================###
