@@ -1,0 +1,13 @@
+*.temp
+*.txt
+*.log
+*.out
+*.tmp
+tmp/
+*.test
+*debug
+*.exe
+
+channel-artifacts
+crypto-config
+docker-compose-e2e.yaml

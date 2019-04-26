@@ -1,0 +1,64 @@
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+version: '2'
+
+services:
+
+  orderer0.bgiblockchain.com:
+    container_name: orderer0
+    extends:
+      file:   base/docker-compose-base.yaml
+      service: orderer0.bgiblockchain.com
+  
+  peer0.health.bgiblockchain.com:
+    container_name: peer0
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.health.bgiblockchain.com
+    depends_on:
+      - orderer0.bgiblockchain.com
+
+  peer1.health.bgiblockchain.com:
+    container_name: peer1
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer1.health.bgiblockchain.com
+
+  peer2.health.bgiblockchain.com:
+    container_name: peer2
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer2.health.bgiblockchain.com
+
+  peer3.health.bgiblockchain.com:
+    container_name: peer3
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer3.health.bgiblockchain.com
+
+  cli2:
+    container_name: cli2
+    extends:
+      file:  base/peer-base.yaml
+      service: cli-base
+    environment:
+      - CORE_PEER_ID=cli2
+      - CORE_PEER_ADDRESS=peer2.health.bgiblockchain.com:7251
+      - CORE_PEER_LOCALMSPID=HealthMSP
+      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/health.bgiblockchain.com/peers/peer2.health.bgiblockchain.com/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/health.bgiblockchain.com/peers/peer2.health.bgiblockchain.com/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/health.bgiblockchain.com/peers/peer2.health.bgiblockchain.com/tls/ca.crt
+    # command: /bin/bash -c './scripts/script.sh ${CHANNEL_NAME}; sleep $TIMEOUT'
+    volumes:
+        - /bgi/blockchain_data/cli2/pro/:/opt/gopath/src/github.com/hyperledger/fabric/peer
+  #      - /usr/bin/telnet:/usr/bin/telnet
+    depends_on:
+      - orderer0.bgiblockchain.com
+      - peer0.health.bgiblockchain.com
+      - peer1.health.bgiblockchain.com
+      - peer2.health.bgiblockchain.com
+      - peer3.health.bgiblockchain.com
+
